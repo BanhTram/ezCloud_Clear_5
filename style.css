@@ -1,45 +1,58 @@
 section {
-    margin-left: 350px;
+  margin-left: 350px;
 }
 
 select {
-    width: 170px;
-    height: 26px;
+  width: 170px;
+  height: 26px;
 }
 
 table {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 ul {
-    display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
-.li_tab{
-    background-color: lightblue;
+
+.li_tab {
+  background-color: lightblue;
 }
+
+.ng-scope {
+  background-color: white;
+}
+
 li {
-    padding: 20px;
-    list-style: none;
-    background-color: white;
-    font-size: 28px;
-    color: black;
-    text-align: center;
+  padding: 20px;
+  list-style: none;
+  background-color: lightblue;
+  font-size: 28px;
+  color: black;
+  text-align: center;
 }
-.dir{
-    border-right: none;
+
+.dir {
+  border-right: none;
 }
-.li_hocSinh{
-    margin-left: -40px;
-    border-right: 1px black solid;
-    width: 365px;
+
+.liHocSinh {
+  margin-left: -40px;
+  border-right: 1px black solid;
+  width: 365px;
 }
-.li_hocSinh a{
-    text-decoration: none;
-    
+
+.liHocSinh a {
+  text-decoration: none;
 }
-.li_lop{
-    width: 365px;
+
+.liLop {
+  width: 365px;
 }
-.li_lop a{
-    text-decoration: none;
+
+.liLop a {
+  text-decoration: none;
 }
+/*# sourceMappingURL=style.css.map */

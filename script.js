@@ -1,4 +1,5 @@
 var app = angular.module("myApp", ['angularUtils.directives.dirPagination']);
+
 app.controller("myController", function ($scope) {
     $scope.hocSinh = [
         { hoTen: "Nam", tuoi: new Date(2004, 01, 01), lop: "--Lop 10A1" },
@@ -31,7 +32,7 @@ app.controller("myController", function ($scope) {
         { hoTen: "t4545", tuoi: new Date(2005, 01, 01), lop: "--Lop 12A1" }
     ];
 
-    $scope.lop_x = [
+    $scope.lopThuoc = [
         { tenLop: "Lop 10A1", thuoc: "Lop 10" },
         { tenLop: "Lop 10A2", thuoc: "Lop 10" },
         { tenLop: "Lop 10A2", thuoc: "Lop 10" },
@@ -61,19 +62,8 @@ app.controller("myController", function ($scope) {
         { tenLop: "Lop 12A1", thuoc: "Lop 12" },
         { tenLop: "Lop 12A2", thuoc: "Lop 12" },
     ];
-    // $scope.lop_y = [
-    //     {id: 1, name: "Lop "},
-    //     {id: 2, name: "Lop 10"}, 
-    //     {id: 3, name: "--Lop 10A1"}, 
-    //     {id: 4, name: "--Lop 10A2"},
-    //     {id: 5, name:  "Lop 11"},
-    //     {id: 6, name:  "--Lop 11A1"},
-    //     {id: 7, name:  "--Lop 11A2"},
-    //     {id: 8, name: "Lop 12"}, 
-    //     {id: 9, name: "--Lop 12A1"},
-    //     {id: 10, name: "--Lop 12A2"}
-    // ];
-    $scope.lop_y = [
+
+    $scope.danhSachTimKiemLop = [
         "Lop ",
         "Lop 10",
         "--Lop 10A1",
@@ -85,135 +75,157 @@ app.controller("myController", function ($scope) {
         "--Lop 12A1",
         "--Lop 12A2"
     ];
-    $scope.Class = [
+
+    $scope.danhSachChonThemSua = [
         "--Lop 10A1", "--Lop 10A2",
         "--Lop 11A1", "--Lop 11A2",
         "--Lop 12A1", "--Lop 12A2"
     ];
+
     $scope.khoi = [
         "Lop 10",
         "Lop 11",
         "Lop 12"
     ];
 
-    $scope.change_Main_Add = true;
-    $scope.change_Main_Edit = true;
-    $scope.main = true;
-    $scope.extra = true;
-    $scope.change_Extra_Add = true;
-    $scope.change_Extra_Edit = true;
-    $scope.change_Tab_Hoc_Sinh = function () {
-        $scope.main = true;//hien main
-        $scope.change_Main_Add = true;//an add
-        $scope.change_Main_Edit = true;//an edit
-        $scope.extra = true;//an extra
-        $scope.change_Extra_Add = true;//an add extra
-        $scope.change_Extra_Edit = true;//an edit extra
-    };
-    $scope.change_Tab_Lop = function () {
-        $scope.main = false;//an main
-        $scope.change_Main_Add = true;// an add 
-        $scope.change_Main_Edit = true;// an edit 
+    $scope.tabHocSinh = true;
+    $scope.tabThemHocSinh = true;
+    $scope.tabSuaHocSinh = true;
 
-        $scope.extra = false;//hien extra
-        $scope.change_Extra_Add = true;//an add extra
-        $scope.change_Extra_Edit = true;//an edit extra
+    $scope.tabLop = true;
+    $scope.tabThemLop = true;
+    $scope.tabSuaLop = true;
+
+    $scope.chuyenTabHocSinh = function () {
+
+        //Show tab HocSinh
+        $scope.tabHocSinh = true;
+        $scope.tabThemHocSinh = true;
+        $scope.tabSuaHocSinh = true;
+
+        //Hide tab Lop
+        $scope.tabLop = true;
+        $scope.tabThemLop = true;
+        $scope.tabSuaLop = true;
     };
 
-    //Tab Hoc Sinh
-    $scope.edit = function (hs) {
-        $scope.change_Main_Edit = false;
-        $scope.main = false;
+    $scope.chuyenTabLop = function () {
+
+        //Hide tab HocSinh
+        $scope.tabHocSinh = false;
+        $scope.tabThemHocSinh = true;
+        $scope.tabSuaHocSinh = true;
+
+        //Show tab Lop
+        $scope.tabLop = false;
+        $scope.tabThemLop = true;
+        $scope.tabSuaLop = true;
+    };
+
+    //tab Hoc Sinh ******************************************************************************* tab Hoc Sinh\\
+    $scope.suaHocSinh = function (hs) {
+        $scope.tabSuaHocSinh = false;
+        $scope.tabHocSinh = false;
         $scope.hs = hs;
     };
-    $scope.saveEdit = function () {
-        $scope.change_Main_Edit = true;
-        $scope.main = true;
+
+    $scope.luuSuaHocSinh = function () {
+        $scope.tabSuaHocSinh = true;
+        $scope.tabHocSinh = true;
+
+        $scope.hocSinh.hoTen = $scope.hs.hoTen;
+        $scope.hocSinh.tuoi = $scope.hs.tuoi;
+        $scope.hocSinh.lop = $scope.hs.hoTen;
+
+        //TODO cap nhat hocSinhMacDinh
+        $scope.hocSinhMacDinh = angular.copy($scope.hocSinh);
     };
-    //Them moi hoc sinh
-    $scope.add = function () {
-        $scope.change_Main_Add = false;
-        $scope.main = false;
+
+    $scope.themHocSinh = function () {
+        $scope.tabThemHocSinh = false;
+        $scope.tabHocSinh = false;
     };
-    $scope.saveAdd = function (hoTen, tuoi, lop) {
-        // var c = new Date().getFullYear() - new Date(tuoi).getFullYear();
+
+    $scope.luuThemHocSinh = function (hoTen, tuoi, lop) {
         if (
             (hoTen != null || hoTen != undefined) &&
             (tuoi != null || tuoi != undefined) &&
             (lop != null || lop != undefined)
         ) {
-            var c = $scope.calculateAge(tuoi);
+            var c = $scope.tinhTuoi(tuoi);
             var x = { hoTen: hoTen, tuoi: tuoi, lop: lop };
+
             $scope.hocSinh.push(x);
-            $scope.change_Main_Add = true;
-            $scope.main = true;
+            $scope.tabThemHocSinh = true;
+            $scope.tabHocSinh = true;
 
             $scope.hoTen = null;
             $scope.tuoi = null;
             $scope.lop = null;
-            $scope.hoc_Sinh_Default.push(x);
+            $scope.hocSinhMacDinh.push(x);
         }
     };
-    $scope.delete = function (hs) {
+
+    $scope.xoaHocSinh = function (hs) {
         var index = $scope.hocSinh.indexOf(hs);
         $scope.hocSinh.splice(index, 1);
     };
-    // $scope.data = {};
-    // $scope.inputData = {};
-    // $scope.applySearch = function () {
-    //     for (prop in $scope.inputData) {
-    //         $scope.data[prop] = $scope.inputData[prop];
-    //     }
-    // };
 
-    $scope.calculateAge = function (birthday) {
-        return (new Date().getFullYear()) - (new Date(birthday).getFullYear());
+    $scope.tinhTuoi = function (ngaySinh) {
+        return (new Date().getFullYear()) - (new Date(ngaySinh).getFullYear());
     }
-    $scope.hoc_Sinh_Default = angular.copy($scope.hocSinh);
-    $scope.inputData = {};
-    $scope.applySearch = function () {
-        var name = $scope.inputData.hoTen;
-        var age = $scope.inputData.tuoi;
-        var clas = $scope.inputData.lop;
-        $scope.hocSinh = angular.copy(_.filter($scope.hoc_Sinh_Default,
+
+    //TODO tao mang hocSinhMacDinh giong y het lop hocSinh
+    $scope.hocSinhMacDinh = angular.copy($scope.hocSinh);
+    $scope.duLieuVaoNutTimKiem = {};
+
+    $scope.timKiem = function () {
+        var tamThoiTen = $scope.duLieuVaoNutTimKiem.hoTen;
+        var tamThoiTuoi = $scope.duLieuVaoNutTimKiem.tuoi;
+        var tamThoiLop = $scope.duLieuVaoNutTimKiem.lop;
+
+        $scope.hocSinh = angular.copy(_.filter($scope.hocSinhMacDinh,
             function (x) {
-                return ((age === null || age === undefined) || (age !== null && age !== undefined && $scope.calculateAge(x.tuoi) == age)) &&
-                    ((clas === null || clas === undefined) || (clas !== null && clas !== undefined && x.lop.includes(clas))) &&
-                    ((name === null || name === undefined) || (name !== null && name !== undefined && x.hoTen.includes(name)));
+                return ((tamThoiTuoi === null || tamThoiTuoi === undefined) || (tamThoiTuoi !== null && tamThoiTuoi !== undefined && $scope.tinhTuoi(x.tuoi) == tamThoiTuoi)) &&
+                    ((tamThoiLop === null || tamThoiLop === undefined) || (tamThoiLop !== null && tamThoiLop !== undefined && x.lop.includes(tamThoiLop))) &&
+                    ((tamThoiTen === null || tamThoiTen === undefined) || (tamThoiTen !== null && tamThoiTen !== undefined && x.hoTen.includes(tamThoiTen)));
             }));
     };
 
-    //Tab Class
-    $scope.deleteClass = function (lop) {
-        var index = $scope.lop_x.indexOf(lop);
-        $scope.lop_x.splice(index, 1);
+     //tab Lop *************************************************************************************** tab Lop\\
+    $scope.xoaLop = function (lop) {
+        var index = $scope.lopThuoc.indexOf(lop);
+        $scope.lopThuoc.splice(index, 1);
     };
-    $scope.addClass = function () {
-        $scope.extra = true;
-        $scope.change_Extra_Add = false;
+
+    $scope.themLop = function () {
+        $scope.tabLop = true;
+        $scope.tabThemLop = false;
     }
-    $scope.saveAddClass = function (tenLop, thuoc) {
+
+    $scope.luuThemLop = function (tenLop, thuoc) {
         if (
             (tenLop != null || tenLop != undefined) &&
             (thuoc != null || thuoc != undefined)
         ) {
-            $scope.lop_x.push({ tenLop: tenLop, thuoc: thuoc });
-            $scope.lop_y.push($scope.tenLop);
-            $scope.Class.push($scope.tenLop);
-            $scope.change_Extra_Add = true;
-            $scope.extra = false;
+            $scope.lopThuoc.push({ tenLop: tenLop, thuoc: thuoc });
+            $scope.danhSachTimKiemLop.push($scope.tenLop);
+            $scope.danhSachChonThemSua.push($scope.tenLop);
+            $scope.tabThemLop = true;
+            $scope.tabLop = false;
             $scope.tenLop = null;
             $scope.thuoc = null;
         }
-
     };
-    $scope.editClass = function (h) {
-        $scope.extra = true;
-        $scope.change_Extra_Edit = false;
-        $scope.h = h;
+
+    $scope.suaLop = function (lop) {
+        $scope.tabLop = true;
+        $scope.tabSuaLop = false;
+        $scope.lop = lop;
     }
-    $scope.saveEditClass = function () {
-        $scope.change_Extra_Edit = true;
-        $scope.extra = false;
+
+    $scope.luuSuaLop = function () {
+        $scope.tabSuaLop = true;
+        $scope.tabLop = false;
     };
 });
