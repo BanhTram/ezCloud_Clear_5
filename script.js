@@ -129,7 +129,6 @@ app.controller("myController", function ($scope) {
     $scope.saveEdit = function () {
         $scope.change_Main_Edit = true;
         $scope.main = true;
-        alert(angular.toJson($scope.hocSinh));
     };
     //Them moi hoc sinh
     $scope.add = function () {
@@ -153,7 +152,6 @@ app.controller("myController", function ($scope) {
             $scope.tuoi = null;
             $scope.lop = null;
             $scope.hoc_Sinh_Default.push(x);
-            // alert(angular.toJson($scope.hocSinh));
         }
     };
     $scope.delete = function (hs) {
@@ -183,7 +181,6 @@ app.controller("myController", function ($scope) {
                     ((clas === null || clas === undefined) || (clas !== null && clas !== undefined && x.lop.includes(clas))) &&
                     ((name === null || name === undefined) || (name !== null && name !== undefined && x.hoTen.includes(name)));
             }));
-        alert(angular.toJson($scope.hocSinh));
     };
 
     //Tab Class
@@ -218,6 +215,5 @@ app.controller("myController", function ($scope) {
     $scope.saveEditClass = function () {
         $scope.change_Extra_Edit = true;
         $scope.extra = false;
-        alert(angular.toJson($scope.lop_x));
     };
 });
